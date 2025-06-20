@@ -1,4 +1,3 @@
-
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const EducationSection = () => {
@@ -9,7 +8,7 @@ const EducationSection = () => {
       year: '2024–2026',
       title: 'M.Tech. in Computer Science',
       institution: 'IIT Tirupati',
-      grade: 'CGPA: 6.55'
+      grade: 'CGPA: 7.2'
     },
     {
       year: '2020–2024',
