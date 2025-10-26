@@ -19,10 +19,17 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-6">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+      {/* Spline 3D Background */}
+      <iframe 
+        src="https://my.spline.design/genkubgreetingrobot-yQZcc4shQb2chAgPhFHnKAha/"
+        className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+        title="3D Background"
+      />
+      
       <div 
         ref={ref}
-        className={`max-w-4xl mx-auto text-center space-y-8 transition-all duration-1000 ${
+        className={`relative z-10 max-w-4xl mx-auto text-center space-y-8 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
