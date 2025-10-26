@@ -19,7 +19,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center px-6 lg:px-12 overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center px-6 lg:px-12 overflow-hidden bg-gradient-to-br from-background via-accent/5 to-background">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left side - Text content */}
@@ -29,9 +29,9 @@ const HeroSection = () => {
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
             }`}
           >
-            <div className="shimmer rounded-lg p-1">
+            <div className="shimmer rounded-lg p-1 shadow-[var(--glow-primary)]">
               <div className="bg-background rounded-lg p-8">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6 bg-gradient-to-r from-primary to-accent-foreground bg-clip-text text-transparent">
                   Parsa Sai Shravan
                 </h1>
                 
@@ -47,18 +47,17 @@ const HeroSection = () => {
                   <Button 
                     onClick={downloadResume}
                     size="lg"
-                    className="group relative overflow-hidden"
+                    className="group relative overflow-hidden hover-lift"
                   >
                     <Download className="w-4 h-4 mr-2 transition-transform group-hover:scale-110" />
                     View Resume
-                    <div className="absolute inset-0 bg-primary/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
                   </Button>
                   
                   <Button 
                     onClick={scrollToContact}
                     variant="outline" 
                     size="lg"
-                    className="group"
+                    className="group hover-lift"
                   >
                     <Mail className="w-4 h-4 mr-2 transition-transform group-hover:scale-110" />
                     Contact Me
@@ -69,7 +68,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right side - Spline 3D Animation */}
-          <div className="relative h-[400px] lg:h-[600px] rounded-lg overflow-hidden">
+          <div className="relative h-[400px] lg:h-[600px] rounded-lg overflow-hidden shadow-[var(--glow-primary)]">
             <iframe 
               src="https://my.spline.design/genkubgreetingrobot-yQZcc4shQb2chAgPhFHnKAha/"
               className="absolute inset-0 w-full h-full border-0"
