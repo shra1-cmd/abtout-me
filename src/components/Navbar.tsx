@@ -3,11 +3,14 @@ import { useState, useEffect } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun, Menu, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,18 +22,34 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setIsMobileMenuOpen(false);
   };
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+
   const navItems = [
-    { label: 'About', id: 'about' },
-    { label: 'Education', id: 'education' },
-    { label: 'Skills', id: 'skills' },
-    { label: 'Contact', id: 'contact' },
+    { label: 'About', id: 'about', isSection: true },
+    { label: 'Education', id: 'education', isSection: true },
+    { label: 'Skills', id: 'skills', isSection: true },
+    { label: 'Projects', path: '/projects', isSection: false },
+    { label: 'Contact', id: 'contact', isSection: true },
   ];
 
   return (
@@ -52,8 +71,8 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                key={item.label}
+                onClick={() => item.isSection ? scrollToSection(item.id!) : handleNavigation(item.path!)}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.label}
@@ -108,8 +127,8 @@ const Navbar = () => {
             <div className="flex flex-col space-y-3">
               {navItems.map((item) => (
                 <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  key={item.label}
+                  onClick={() => item.isSection ? scrollToSection(item.id!) : handleNavigation(item.path!)}
                   className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                 >
                   {item.label}
