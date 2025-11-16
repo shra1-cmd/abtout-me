@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { ThemeProvider } from '@/hooks/useTheme';
+import { useAuth } from '@/contexts/AuthContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,6 +32,8 @@ interface Skill {
 }
 
 const Admin = () => {
+  const navigate = useNavigate();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,8 +55,23 @@ const Admin = () => {
   const [skillIcon, setSkillIcon] = useState<File | null>(null);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (!authLoading) {
+      if (!user) {
+        navigate('/auth');
+        return;
+      }
+      if (!isAdmin) {
+        toast({ 
+          title: 'Access Denied', 
+          description: 'You do not have admin privileges',
+          variant: 'destructive' 
+        });
+        navigate('/');
+        return;
+      }
+      fetchData();
+    }
+  }, [user, isAdmin, authLoading, navigate]);
 
   const fetchData = async () => {
     try {
@@ -188,7 +207,7 @@ const Admin = () => {
     }
   };
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <ThemeProvider>
         <div className="min-h-screen bg-background flex items-center justify-center">
@@ -196,6 +215,10 @@ const Admin = () => {
         </div>
       </ThemeProvider>
     );
+  }
+
+  if (!user || !isAdmin) {
+    return null;
   }
 
   return (
