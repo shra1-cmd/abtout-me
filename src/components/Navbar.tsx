@@ -1,12 +1,14 @@
 
 import { useState, useEffect } from 'react';
 import { useTheme } from '@/hooks/useTheme';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, LogOut } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const { user, isAdmin, signOut } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -50,8 +52,14 @@ const Navbar = () => {
     { label: 'Skills', id: 'skills', isSection: true },
     { label: 'Projects', path: '/projects', isSection: false },
     { label: 'Contact', id: 'contact', isSection: true },
-    { label: 'Admin', path: '/admin', isSection: false },
+    ...(isAdmin ? [{ label: 'Admin', path: '/admin', isSection: false }] : []),
   ];
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -79,6 +87,16 @@ const Navbar = () => {
                 {item.label}
               </button>
             ))}
+            {user && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleLogout}
+                className="w-9 h-9 p-0"
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
+            )}
             <Button
               variant="ghost"
               size="sm"
@@ -135,6 +153,15 @@ const Navbar = () => {
                   {item.label}
                 </button>
               ))}
+              {user && (
+                <button
+                  onClick={handleLogout}
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 flex items-center"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </button>
+              )}
             </div>
           </div>
         )}

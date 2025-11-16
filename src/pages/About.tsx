@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { ThemeProvider } from '@/hooks/useTheme';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Mail, Github, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Github, Linkedin, Instagram, ArrowLeft } from 'lucide-react';
 
 const About = () => {
+  const navigate = useNavigate();
   const [aboutData, setAboutData] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const { ref, isVisible } = useScrollAnimation();
@@ -51,6 +54,16 @@ const About = () => {
         
         <main className="pt-24 pb-16">
           <div className="container mx-auto px-6 max-w-4xl">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="mb-6"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Home
+            </Button>
+            
             <div
               ref={ref}
               className={`transition-all duration-1000 ${
