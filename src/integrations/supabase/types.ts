@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      about_info: {
+        Row: {
+          created_at: string
+          id: string
+          key: string
+          type: string | null
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key: string
+          type?: string | null
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key?: string
+          type?: string | null
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           created_at: string
@@ -43,6 +70,36 @@ export type Database = {
           image_url?: string | null
           live_link?: string | null
           title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          category: string | null
+          created_at: string
+          icon_url: string | null
+          id: string
+          name: string
+          order_index: number | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          icon_url?: string | null
+          id?: string
+          name: string
+          order_index?: number | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          icon_url?: string | null
+          id?: string
+          name?: string
+          order_index?: number | null
           updated_at?: string
         }
         Relationships: []

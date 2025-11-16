@@ -45,11 +45,12 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { label: 'About', id: 'about', isSection: true },
+    { label: 'About', path: '/about', isSection: false },
     { label: 'Education', id: 'education', isSection: true },
     { label: 'Skills', id: 'skills', isSection: true },
     { label: 'Projects', path: '/projects', isSection: false },
     { label: 'Contact', id: 'contact', isSection: true },
+    { label: 'Admin', path: '/admin', isSection: false },
   ];
 
   return (
