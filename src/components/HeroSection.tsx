@@ -32,10 +32,10 @@ const HeroSection = () => {
             <div className="space-y-8 py-12">
               <div className="space-y-2">
                 <p className="text-sm md:text-base text-muted-foreground uppercase tracking-wider font-light">
-                  WE DESIGN & BUILD BRANDS
+                  WELCOME
                 </p>
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                  Hi, I am <span className="bg-gradient-to-r from-primary to-accent-foreground bg-clip-text text-transparent">Parsa</span> This is my favorite work.
+                  Hi, welcome to the personal page of <span className="bg-gradient-to-r from-primary to-accent-foreground bg-clip-text text-transparent">Shravan</span>
                 </h1>
               </div>
               
