@@ -5,8 +5,6 @@ const AboutSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   const facts = [
-    { emoji: '🎓', text: 'M.Tech. @ IIT Tirupati (CGPA: 6.55)' },
-    { emoji: '🛠️', text: 'B.Tech. Mech @ JNTUH Sultanpur (CGPA: 6.60)' },
     { emoji: '🗣️', text: 'Languages: Telugu, Hindi, English' },
     { emoji: '📍', text: 'Nirmal, Telangana' },
   ];
