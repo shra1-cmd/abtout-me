@@ -47,11 +47,12 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { label: 'About', path: '/about', isSection: false },
     { label: 'Education', id: 'education', isSection: true },
     { label: 'Skills', id: 'skills', isSection: true },
     { label: 'Projects', path: '/projects', isSection: false },
     { label: 'Contact', id: 'contact', isSection: true },
+    { label: 'Auth', path: '/auth', isSection: false },
+    { label: 'About', path: '/about', isSection: false },
     ...(isAdmin ? [{ label: 'Admin', path: '/admin', isSection: false }] : []),
   ];
 
